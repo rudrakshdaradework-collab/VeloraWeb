@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;font-size:16px;}
+html{scroll-behavior:smooth;}
 :root{
   --ink:#08090b;--ink2:#0f1114;--ink3:#161a1f;
   --fog:rgba(255,255,255,0.04);--fog2:rgba(255,255,255,0.07);
@@ -27,8 +27,8 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--snow);ove
 
 /* CURSOR */
 .cursor{position:fixed;z-index:1000;pointer-events:none;mix-blend-mode:difference;}
-.cursor-dot{width:8px;height:8px;border-radius:50%;background:#fff;position:absolute;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-.cursor-ring{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.5);position:absolute;transform:translate(-50%,-50%);transition:all .12s ease;}
+.cursor-dot{width:8px;height:8px;border-radius:50%;background:#fff;position:absolute;transform:translate(-50%,-50%);}
+.cursor-ring{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.5);position:absolute;transform:translate(-50%,-50%);transition:width .15s,height .15s,opacity .15s;}
 
 /* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;display:flex;align-items:center;padding:0 clamp(1.5rem,5vw,4rem);transition:background .4s,border-color .4s;}
@@ -56,7 +56,7 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--snow);ove
 /* HERO */
 #hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:0 clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 60% 40%,rgba(58,124,200,.14) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 15% 70%,rgba(123,184,245,.07) 0%,transparent 50%),linear-gradient(180deg,var(--ink) 0%,#0a0d12 100%);}
-.hero-grid-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hero-grid-lines{position:absolute;inset:0;pointer-events:none;}
 .hero-grid-lines::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 75%);}
 .hero-vline{position:absolute;width:1px;background:linear-gradient(180deg,transparent,var(--sky3),transparent);animation:vlineFloat 6s ease-in-out infinite;}
 @keyframes vlineFloat{0%,100%{opacity:.3;transform:translateY(0);}50%{opacity:.7;transform:translateY(-20px);}}
@@ -154,7 +154,7 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--snow);ove
 .svc-card:hover::after{transform:scaleX(1);}
 .svc-icon{width:48px;height:48px;border-radius:var(--r2);background:rgba(58,124,200,.1);border:1px solid rgba(58,124,200,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.3rem;transition:all .3s;}
 .svc-card:hover .svc-icon{background:rgba(58,124,200,.18);border-color:var(--sky3);transform:scale(1.05);}
-.svc-num{position:absolute;top:1.5rem;right:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.06em;color:rgba(255,255,255,.04);line-height:1;transition:color .3s;}
+.svc-num{position:absolute;top:1.5rem;right:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(255,255,255,.04);line-height:1;transition:color .3s;}
 .svc-card:hover .svc-num{color:rgba(123,184,245,.08);}
 .svc-title{font-size:1rem;font-weight:600;margin-bottom:.7rem;}
 .svc-desc{font-size:.84rem;color:var(--mist);font-weight:300;line-height:1.75;}
@@ -204,35 +204,20 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--snow);ove
 .feat-chk{width:16px;height:16px;border-radius:50%;background:rgba(58,124,200,.15);border:1px solid var(--sky3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.55rem;color:var(--sky2);}
 @media(max-width:820px){.pricing-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto;}.plan-card.popular{transform:none;}.plan-card.popular:hover{transform:translateY(-6px);}}
 
-/* PORTFOLIO */
-#portfolio{background:var(--ink);}
-.portfolio-hdr{text-align:center;margin-bottom:4rem;}
-.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
-.pf-item{border-radius:var(--r2);overflow:hidden;border:1px solid var(--line);position:relative;cursor:pointer;background:var(--ink3);aspect-ratio:4/3;transition:all .4s;}
-.pf-item:hover{border-color:rgba(123,184,245,.25);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5);}
-.pf-item:hover .pf-overlay{opacity:1;}
-.pf-item:hover .pf-screen{transform:scale(1.04);}
-.pf-screen{width:100%;height:100%;transition:transform .5s ease;}
-.pf-overlay{position:absolute;inset:0;background:rgba(8,9,11,.88);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;opacity:0;transition:opacity .35s;}
-.pf-overlay h4{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:500;}
-.pf-overlay p{font-size:.75rem;color:var(--mist);}
-.pf-tag{margin-top:.8rem;padding:.3rem .9rem;border:1px solid var(--sky3);border-radius:100px;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sky2);}
-.browser-mock{width:100%;height:100%;display:flex;flex-direction:column;}
-.browser-bar{height:26px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 10px;gap:5px;}
-.br-dot{width:7px;height:7px;border-radius:50%;}
-.browser-content{flex:1;overflow:hidden;position:relative;}
-.mock-nav{height:28px;display:flex;align-items:center;padding:0 1rem;border-bottom:1px solid rgba(255,255,255,.04);}
-.mock-logo{height:7px;border-radius:3px;}
-.mock-links{display:flex;gap:8px;margin-left:1.5rem;}
-.mock-link{width:24px;height:5px;border-radius:2px;background:rgba(255,255,255,.07);}
-.mock-hero{padding:1rem;display:flex;flex-direction:column;gap:6px;}
-.mock-h1{height:12px;border-radius:3px;width:70%;}
-.mock-h2{height:8px;border-radius:2px;width:50%;background:rgba(255,255,255,.06);}
-.mock-cta{height:16px;border-radius:3px;width:28%;margin-top:4px;}
-.mock-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 1rem;}
-.mock-card{height:36px;border-radius:4px;border:1px solid rgba(255,255,255,.04);}
-@media(max-width:768px){.portfolio-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:480px){.portfolio-grid{grid-template-columns:1fr;}}
+/* ORBIT ANIMATION SECTION */
+#portfolio{background:var(--ink);overflow:hidden;}
+.skill-tag{position:absolute;padding:.45rem 1rem;background:rgba(15,17,20,.85);border:1px solid var(--line2);border-radius:100px;font-size:.78rem;font-weight:400;color:var(--mist);letter-spacing:.06em;backdrop-filter:blur(12px);white-space:nowrap;animation:tagFloat 4s ease-in-out infinite;cursor:default;transition:all .3s;z-index:5;}
+.skill-tag:nth-child(1){animation-delay:0s;}.skill-tag:nth-child(2){animation-delay:.6s;}.skill-tag:nth-child(3){animation-delay:1.2s;}.skill-tag:nth-child(4){animation-delay:1.8s;}.skill-tag:nth-child(5){animation-delay:2.4s;}.skill-tag:nth-child(6){animation-delay:.9s;}.skill-tag:nth-child(7){animation-delay:1.5s;}.skill-tag:nth-child(8){animation-delay:.3s;}
+.skill-tag:hover{background:rgba(58,124,200,.15);border-color:var(--sky);color:var(--sky2);transform:scale(1.08);}
+@keyframes tagFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.ripple-ring{position:absolute;top:50%;left:50%;width:var(--s);height:var(--s);margin-left:calc(var(--s) / -2);margin-top:calc(var(--s) / -2);border-radius:50%;border:1px solid rgba(123,184,245,.12);animation:rippleExpand 3s var(--d) ease-out infinite;pointer-events:none;z-index:2;}
+@keyframes rippleExpand{0%{transform:scale(.85);opacity:.6;}100%{transform:scale(1.15);opacity:0;}}
+.work-stats-row{display:flex;align-items:center;justify-content:center;background:rgba(15,17,20,.6);border:1px solid var(--line);border-radius:var(--r3);backdrop-filter:blur(20px);overflow:hidden;}
+.work-stat{flex:1;padding:2rem 1.5rem;text-align:center;}
+.work-stat-num{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:.04em;color:var(--sky2);line-height:1;}
+.work-stat-lbl{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ghost);margin-top:.4rem;}
+.work-stat-div{width:1px;height:60px;background:var(--line);flex-shrink:0;}
+@media(max-width:600px){.work-stats-row{flex-wrap:wrap;}.work-stat-div{display:none;}.work-stat{min-width:50%;}}
 
 /* CONTACT */
 #contact{background:var(--ink2);}
@@ -281,7 +266,6 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
 .sr.in{opacity:1;transform:translate(0);}
 .sr-d1{transition-delay:.1s;}.sr-d2{transition-delay:.2s;}.sr-d3{transition-delay:.3s;}.sr-d4{transition-delay:.4s;}.sr-d5{transition-delay:.5s;}
 
-/* KEYFRAMES */
 @keyframes slideUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
 @keyframes slideRight{from{opacity:0;transform:translateX(-24px);}to{opacity:1;transform:translateX(0);}}
 @keyframes slideLeft{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
@@ -330,10 +314,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
   <div class="hero-vline" style="right:8%;top:50%;height:110px;animation-delay:-2s;opacity:.5;"></div>
 
   <div class="hero-content">
-    <div class="hero-eyebrow">
-      <span class="eyebrow-dot"></span>
-      Digital Agency · Local Business Specialists
-    </div>
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Digital Agency · Local Business Specialists</div>
     <h1 class="hero-h1">
       Websites That
       <span class="italic-line"><span class="underline-word">Grow</span> Your</span>
@@ -399,7 +380,6 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
         <div class="stat-chip chip-b sr sr-left sr-d3"><span class="chip-num">50+</span><div class="chip-lbl">Sites Launched</div></div>
         <div class="status-badge sr sr-d4"><span class="s-dot"></span>Accepting New Clients</div>
       </div>
-
       <div>
         <div class="label-tag sr">About Velora</div>
         <h2 class="display-title sr sr-d1" style="margin-bottom:1.5rem;">Built for Local<br><em>Businesses That Mean</em><br>Business.</h2>
@@ -433,7 +413,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
       <div class="svc-card sr sr-d2"><span class="svc-num">02</span><div class="svc-icon">📱</div><div class="svc-title">Mobile Optimized Design</div><p class="svc-desc">Over 70% of local searches happen on mobile. Every site we build is flawlessly responsive across all devices and screen sizes.</p></div>
       <div class="svc-card sr sr-d3"><span class="svc-num">03</span><div class="svc-icon">🔍</div><div class="svc-title">SEO Basics</div><p class="svc-desc">We configure your site for search engines from the ground up — titles, meta tags, schema, speed, and Google-friendly architecture.</p></div>
       <div class="svc-card sr sr-d1"><span class="svc-num">04</span><div class="svc-icon">📋</div><div class="svc-title">Lead Capture Forms</div><p class="svc-desc">Strategic forms, CTAs, and inquiry widgets positioned to convert your curious visitors into paying customers automatically.</p></div>
-      <div class="svc-card sr sr-d2"><span class="svc-num">05</span><div class="svc-icon">⚡</div><div class="svc-title">Fast Loading Performance</div><p class="svc-desc">Blazing-fast load times through optimized code, compressed assets, and performance best practices. Google rewards speed — so do users.</p></div>
+      <div class="svc-card sr sr-d2"><span class="svc-num">05</span><div class="svc-icon">⚡</div><div class="svc-title">Fast Loading Performance</div><p class="svc-desc">Blazing-fast load times through optimized code, compressed assets, and performance best practices. Google rewards speed.</p></div>
       <div class="svc-card sr sr-d3"><span class="svc-num">06</span><div class="svc-icon">✦</div><div class="svc-title">Professional UI/UX Design</div><p class="svc-desc">Premium visual design paired with intuitive user experience. Every click, scroll, and interaction is crafted with your customer in mind.</p></div>
     </div>
   </div>
@@ -533,44 +513,46 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
   </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- ORBIT ANIMATION (replaces portfolio) -->
 <section id="portfolio">
-  <div class="section-wrap">
-    <div class="portfolio-hdr">
-      <div class="label-tag sr" style="display:inline-flex;">Portfolio</div>
+  <div class="section-wrap" style="padding-bottom:2rem;">
+    <div style="text-align:center;">
+      <div class="label-tag sr" style="display:inline-flex;">What We Do</div>
       <h2 class="display-title sr sr-d1" style="margin-top:.8rem;">Crafted with Purpose,<br><em>Built to Perform</em></h2>
+      <p class="body-text sr sr-d2" style="max-width:480px;margin:1.2rem auto 0;">Every pixel we design serves a purpose. Every line of code we write drives results.</p>
     </div>
-    <div class="portfolio-grid">
-      <!-- Restaurant -->
-      <div class="pf-item sr sr-d1">
-        <div class="pf-screen"><div class="browser-mock"><div class="browser-bar" style="background:#140800;"><div class="br-dot" style="background:#ff5f57"></div><div class="br-dot" style="background:#ffbd2e"></div><div class="br-dot" style="background:#28ca42"></div></div><div class="browser-content" style="background:linear-gradient(160deg,#1c0c00,#2a1000);"><div class="mock-nav"><div class="mock-logo" style="background:rgba(255,140,0,.35);width:50px;"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div></div><div class="mock-hero"><div class="mock-h1" style="background:rgba(255,160,60,.5);"></div><div class="mock-h2"></div><div class="mock-cta" style="background:rgba(255,120,0,.5);"></div></div><div class="mock-cards"><div class="mock-card" style="background:rgba(255,100,0,.08);"></div><div class="mock-card" style="background:rgba(255,100,0,.06);"></div><div class="mock-card" style="background:rgba(255,100,0,.08);"></div></div></div></div></div>
-        <div class="pf-overlay"><h4>Spice Route Kitchen</h4><p>Restaurant · Mumbai</p><div class="pf-tag">View Project</div></div>
-      </div>
-      <!-- Salon -->
-      <div class="pf-item sr sr-d2">
-        <div class="pf-screen"><div class="browser-mock"><div class="browser-bar" style="background:#100814;"><div class="br-dot" style="background:#ff5f57"></div><div class="br-dot" style="background:#ffbd2e"></div><div class="br-dot" style="background:#28ca42"></div></div><div class="browser-content" style="background:linear-gradient(160deg,#160b20,#0e0916);"><div class="mock-nav"><div class="mock-logo" style="background:rgba(200,100,220,.35);width:46px;"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div></div><div class="mock-hero"><div class="mock-h1" style="background:rgba(220,140,255,.5);"></div><div class="mock-h2"></div><div class="mock-cta" style="background:rgba(190,80,220,.5);"></div></div><div class="mock-cards"><div class="mock-card" style="background:rgba(200,100,220,.07);"></div><div class="mock-card" style="background:rgba(200,100,220,.05);"></div><div class="mock-card" style="background:rgba(200,100,220,.07);"></div></div></div></div></div>
-        <div class="pf-overlay"><h4>Luxe Beauty Studio</h4><p>Beauty & Wellness · Pune</p><div class="pf-tag">View Project</div></div>
-      </div>
-      <!-- Real Estate -->
-      <div class="pf-item sr sr-d3">
-        <div class="pf-screen"><div class="browser-mock"><div class="browser-bar" style="background:#081018;"><div class="br-dot" style="background:#ff5f57"></div><div class="br-dot" style="background:#ffbd2e"></div><div class="br-dot" style="background:#28ca42"></div></div><div class="browser-content" style="background:linear-gradient(160deg,#061420,#081c2a);"><div class="mock-nav"><div class="mock-logo" style="background:rgba(60,180,200,.35);width:52px;"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div></div><div class="mock-hero"><div class="mock-h1" style="background:rgba(80,200,220,.5);"></div><div class="mock-h2"></div><div class="mock-cta" style="background:rgba(40,160,180,.5);"></div></div><div class="mock-cards"><div class="mock-card" style="background:rgba(60,180,200,.08);"></div><div class="mock-card" style="background:rgba(60,180,200,.06);"></div><div class="mock-card" style="background:rgba(60,180,200,.08);"></div></div></div></div></div>
-        <div class="pf-overlay"><h4>Prime Realty Group</h4><p>Real Estate · Navi Mumbai</p><div class="pf-tag">View Project</div></div>
-      </div>
-      <!-- Clinic -->
-      <div class="pf-item sr sr-d1">
-        <div class="pf-screen"><div class="browser-mock"><div class="browser-bar" style="background:#081410;"><div class="br-dot" style="background:#ff5f57"></div><div class="br-dot" style="background:#ffbd2e"></div><div class="br-dot" style="background:#28ca42"></div></div><div class="browser-content" style="background:linear-gradient(160deg,#061610,#091e14);"><div class="mock-nav"><div class="mock-logo" style="background:rgba(60,200,140,.35);width:44px;"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div></div><div class="mock-hero"><div class="mock-h1" style="background:rgba(80,220,160,.5);"></div><div class="mock-h2"></div><div class="mock-cta" style="background:rgba(40,180,120,.5);"></div></div><div class="mock-cards"><div class="mock-card" style="background:rgba(60,200,140,.07);"></div><div class="mock-card" style="background:rgba(60,200,140,.05);"></div><div class="mock-card" style="background:rgba(60,200,140,.07);"></div></div></div></div></div>
-        <div class="pf-overlay"><h4>ClearPath Dental</h4><p>Healthcare · Thane</p><div class="pf-tag">View Project</div></div>
-      </div>
-      <!-- Gym -->
-      <div class="pf-item sr sr-d2">
-        <div class="pf-screen"><div class="browser-mock"><div class="browser-bar" style="background:#140600;"><div class="br-dot" style="background:#ff5f57"></div><div class="br-dot" style="background:#ffbd2e"></div><div class="br-dot" style="background:#28ca42"></div></div><div class="browser-content" style="background:linear-gradient(160deg,#180400,#200800);"><div class="mock-nav"><div class="mock-logo" style="background:rgba(255,60,20,.35);width:38px;"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div></div><div class="mock-hero"><div class="mock-h1" style="background:rgba(255,100,40,.5);"></div><div class="mock-h2"></div><div class="mock-cta" style="background:rgba(220,50,10,.5);"></div></div><div class="mock-cards"><div class="mock-card" style="background:rgba(255,60,20,.08);"></div><div class="mock-card" style="background:rgba(255,60,20,.06);"></div><div class="mock-card" style="background:rgba(255,60,20,.08);"></div></div></div></div></div>
-        <div class="pf-overlay"><h4>Iron Temple Gym</h4><p>Fitness · Andheri</p><div class="pf-tag">View Project</div></div>
-      </div>
-      <!-- Law -->
-      <div class="pf-item sr sr-d3">
-        <div class="pf-screen"><div class="browser-mock"><div class="browser-bar" style="background:#100e00;"><div class="br-dot" style="background:#ff5f57"></div><div class="br-dot" style="background:#ffbd2e"></div><div class="br-dot" style="background:#28ca42"></div></div><div class="browser-content" style="background:linear-gradient(160deg,#14100a,#1c1608);"><div class="mock-nav"><div class="mock-logo" style="background:rgba(212,168,83,.35);width:48px;"></div><div class="mock-links"><div class="mock-link"></div><div class="mock-link"></div><div class="mock-link"></div></div></div><div class="mock-hero"><div class="mock-h1" style="background:rgba(220,180,80,.5);"></div><div class="mock-h2"></div><div class="mock-cta" style="background:rgba(180,140,50,.5);"></div></div><div class="mock-cards"><div class="mock-card" style="background:rgba(212,168,83,.07);"></div><div class="mock-card" style="background:rgba(212,168,83,.05);"></div><div class="mock-card" style="background:rgba(212,168,83,.07);"></div></div></div></div></div>
-        <div class="pf-overlay"><h4>Sharma & Associates</h4><p>Legal Services · South Mumbai</p><div class="pf-tag">View Project</div></div>
-      </div>
+  </div>
+
+  <div style="position:relative;width:100%;height:620px;overflow:hidden;">
+    <canvas id="orbitCanvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+    <div class="skill-tag" style="top:12%;left:6%;">Custom Websites</div>
+    <div class="skill-tag" style="top:8%;right:8%;">SEO Ready</div>
+    <div class="skill-tag" style="top:38%;left:3%;">Mobile First</div>
+    <div class="skill-tag" style="top:72%;left:10%;">Lead Forms</div>
+    <div class="skill-tag" style="top:80%;right:6%;">Fast Loading</div>
+    <div class="skill-tag" style="top:42%;right:4%;">UI / UX Design</div>
+    <div class="skill-tag" style="top:62%;left:42%;">Google Maps</div>
+    <div class="skill-tag" style="top:18%;left:40%;">Analytics</div>
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:10;">
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:500;color:#fff;line-height:1.2;">Your Business</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-style:italic;color:var(--sky2);line-height:1.2;">at the center</div>
+      <div style="width:50px;height:1px;background:var(--sky3);margin:.8rem auto;"></div>
+      <div style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ghost);">of everything</div>
+    </div>
+    <div class="ripple-ring" style="--d:0s;--s:220px;"></div>
+    <div class="ripple-ring" style="--d:1s;--s:340px;"></div>
+    <div class="ripple-ring" style="--d:2s;--s:460px;"></div>
+  </div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem) clamp(3rem,6vw,5rem);">
+    <div class="work-stats-row sr">
+      <div class="work-stat"><span class="work-stat-num">50+</span><span class="work-stat-lbl">Websites Launched</span></div>
+      <div class="work-stat-div"></div>
+      <div class="work-stat"><span class="work-stat-num">12+</span><span class="work-stat-lbl">Industries Served</span></div>
+      <div class="work-stat-div"></div>
+      <div class="work-stat"><span class="work-stat-num">3x</span><span class="work-stat-lbl">Average Lead Increase</span></div>
+      <div class="work-stat-div"></div>
+      <div class="work-stat"><span class="work-stat-num">7d</span><span class="work-stat-lbl">Average Delivery</span></div>
     </div>
   </div>
 </section>
@@ -598,9 +580,9 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
           <div class="form-group"><label>Phone Number</label><input type="tel" id="fp" placeholder="+91 9145225605"></div>
           <div class="form-group"><label>Email Address</label><input type="email" id="fe" placeholder="rahul@business.com"></div>
         </div>
-        <div class="form-group full"><label>Tell Us About Your Project</label><textarea id="fm" placeholder="I run a restaurant in Mumbai and need a website with an online menu, contact form, and Google Maps..."></textarea></div>
+        <div class="form-group full"><label>Tell Us About Your Project</label><textarea id="fm" placeholder="I run a restaurant in Mumbai and need a website with online menu, contact form, and Google Maps..."></textarea></div>
         <button class="form-submit" onclick="submitForm()">Send Message →</button>
-        <div class="form-success" id="fsuc">✓ Message received! We'll be in touch within 24 hours.</div>
+        <div class="form-success" id="fsuc">&#10003; Message received! We'll be in touch within 24 hours.</div>
       </div>
     </div>
   </div>
@@ -615,13 +597,13 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
       <div class="footer-socials">
         <a href="#" class="soc-btn">IG</a>
         <a href="#" class="soc-btn">in</a>
-        <a href="#" class="soc-btn">𝕏</a>
+        <a href="#" class="soc-btn">X</a>
         <a href="#" class="soc-btn">WA</a>
       </div>
     </div>
     <div class="footer-col">
       <h5>Quick Links</h5>
-      <ul><li><a href="#about">About Us</a></li><li><a href="#services">Services</a></li><li><a href="#process">How It Works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul>
+      <ul><li><a href="#about">About Us</a></li><li><a href="#services">Services</a></li><li><a href="#process">How It Works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#portfolio">Work</a></li><li><a href="#contact">Contact</a></li></ul>
     </div>
     <div class="footer-col">
       <h5>Services</h5>
@@ -629,22 +611,27 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem
     </div>
     <div class="footer-col">
       <h5>Contact</h5>
-      <ul><li><a href="mailto:rudrakshdaradework@gmail.com">rudrakshdaradework&#64;gmail&#46;com</a></li><li><a href="tel:+919145225605">+91 9145225605</a></li><li><a href="#">Mumbai, India</a></li><li><a href="#">WhatsApp Chat</a></li></ul>
+      <ul>
+        <li><a href="mailto:rudrakshdaradework@gmail.com">rudrakshdaradework&#64;gmail&#46;com</a></li>
+        <li><a href="tel:+919145225605">+91 9145225605</a></li>
+        <li><a href="#">Mumbai, India</a></li>
+        <li><a href="#">WhatsApp Chat</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Velora Digital Agency. All rights reserved.</p>
-    <p>Crafted with precision in Mumbai 🇮🇳</p>
+    <p>&#169; 2025 Velora Digital Agency. All rights reserved.</p>
+    <p>Crafted with precision in Mumbai &#127470;&#127475;</p>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // CURSOR
 const curDot=document.getElementById('curDot'),curRing=document.getElementById('curRing');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;curDot.style.left=mx+'px';curDot.style.top=my+'px';});
-(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curRing.style.left=rx+'px';curRing.style.top=ry+'px';requestAnimationFrame(anim);})();
-document.querySelectorAll('a,button,.svc-card,.plan-card,.step-card,.pf-item').forEach(el=>{
+(function animCur(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curRing.style.left=rx+'px';curRing.style.top=ry+'px';requestAnimationFrame(animCur);})();
+document.querySelectorAll('a,button,.svc-card,.plan-card,.step-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>{curRing.style.width='56px';curRing.style.height='56px';curRing.style.opacity='.6';});
   el.addEventListener('mouseleave',()=>{curRing.style.width='36px';curRing.style.height='36px';curRing.style.opacity='1';});
 });
@@ -671,22 +658,98 @@ document.querySelectorAll('[data-count]').forEach(c=>cObs.observe(c));
 
 // FORM
 function submitForm(){
-  const n=document.getElementById('fn').value.trim(),
-        b=document.getElementById('fb').value.trim(),
-        p=document.getElementById('fp').value.trim(),
-        em=document.getElementById('fe').value.trim(),
-        m=document.getElementById('fm').value.trim();
+  const n=document.getElementById('fn').value.trim(),b=document.getElementById('fb').value.trim(),p=document.getElementById('fp').value.trim(),em=document.getElementById('fe').value.trim(),m=document.getElementById('fm').value.trim();
   if(!n||!em||!m){alert('Please fill in your name, email, and message.');return;}
-  const msg=`Hi Velora! 👋\n\n*Name:* ${n}\n*Business:* ${b||'—'}\n*Phone:* ${p||'—'}\n*Email:* ${em}\n\n*Message:*\n${m}`;
-  const waURL=`https://wa.me/919145225605?text=${encodeURIComponent(msg)}`;
   ['fn','fb','fp','fe','fm'].forEach(id=>document.getElementById(id).value='');
   const s=document.getElementById('fsuc');s.style.display='block';
   setTimeout(()=>s.style.display='none',6000);
-  window.open(waURL,'_blank');
 }
 
 // PARALLAX
 window.addEventListener('scroll',()=>{const s=scrollY;document.querySelectorAll('.hero-vline').forEach((l,i)=>{l.style.transform=`translateY(${s*(.06+i*.03)}px)`;});});
+
+// ORBIT CANVAS
+(function(){
+  const canvas=document.getElementById('orbitCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,cx,cy,mouse={x:0,y:0},raf;
+
+  function resize(){
+    W=canvas.offsetWidth;H=canvas.offsetHeight;
+    canvas.width=W*devicePixelRatio;canvas.height=H*devicePixelRatio;
+    ctx.scale(devicePixelRatio,devicePixelRatio);
+    cx=W/2;cy=H/2;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  canvas.parentElement.addEventListener('mousemove',e=>{
+    const r=canvas.getBoundingClientRect();
+    mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;
+  });
+
+  const orbits=[
+    {r:110,speed:0.4,nodes:6,size:3,color:[123,184,245]},
+    {r:170,speed:-0.25,nodes:9,size:2.5,color:[90,158,220]},
+    {r:230,speed:0.18,nodes:12,size:2,color:[58,124,200]},
+    {r:285,speed:-0.12,nodes:16,size:1.5,color:[168,212,255]},
+  ];
+
+  const particles=[];
+  orbits.forEach(o=>{
+    for(let i=0;i<o.nodes;i++){
+      particles.push({orbit:o,angle:(Math.PI*2/o.nodes)*i+Math.random()*0.3,pulse:Math.random()*Math.PI*2});
+    }
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const ox=(mouse.x-cx)*0.04,oy=(mouse.y-cy)*0.04;
+
+    orbits.forEach(o=>{
+      ctx.beginPath();ctx.arc(cx+ox*0.3,cy+oy*0.3,o.r,0,Math.PI*2);
+      ctx.strokeStyle='rgba(123,184,245,0.05)';ctx.lineWidth=1;ctx.stroke();
+    });
+
+    const positions=[];
+    particles.forEach(p=>{
+      p.angle+=p.orbit.speed*0.012;p.pulse+=0.04;
+      const x=cx+ox*0.5+Math.cos(p.angle)*p.orbit.r;
+      const y=cy+oy*0.5+Math.sin(p.angle)*p.orbit.r;
+      const sz=p.orbit.size*(0.8+Math.sin(p.pulse)*0.3);
+      const [r,g,b]=p.orbit.color;
+      const alpha=0.5+Math.sin(p.pulse)*0.3;
+      const grad=ctx.createRadialGradient(x,y,0,x,y,sz*4);
+      grad.addColorStop(0,`rgba(${r},${g},${b},${alpha*0.6})`);
+      grad.addColorStop(1,`rgba(${r},${g},${b},0)`);
+      ctx.beginPath();ctx.arc(x,y,sz*4,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+      ctx.beginPath();ctx.arc(x,y,sz,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${alpha})`;ctx.fill();
+      positions.push({x,y,r,g,b,orbit:p.orbit.r});
+    });
+
+    for(let i=0;i<positions.length;i++){
+      for(let j=i+1;j<positions.length;j++){
+        const a=positions[i],b=positions[j];
+        const dist=Math.hypot(a.x-b.x,a.y-b.y);
+        if(dist<70&&Math.abs(a.orbit-b.orbit)<50){
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=`rgba(123,184,245,${(1-dist/70)*0.18})`;ctx.lineWidth=0.8;ctx.stroke();
+        }
+      }
+    }
+
+    const cg=ctx.createRadialGradient(cx+ox,cy+oy,0,cx+ox,cy+oy,90);
+    cg.addColorStop(0,'rgba(58,124,200,0.18)');cg.addColorStop(0.5,'rgba(58,124,200,0.06)');cg.addColorStop(1,'rgba(58,124,200,0)');
+    ctx.beginPath();ctx.arc(cx+ox,cy+oy,90,0,Math.PI*2);ctx.fillStyle=cg;ctx.fill();
+
+    raf=requestAnimationFrame(draw);
+  }
+
+  const obsC=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){draw();}else{cancelAnimationFrame(raf);}
+  },{threshold:0.1});
+  obsC.observe(canvas);
+})();
 </script>
 </body>
 </html>
